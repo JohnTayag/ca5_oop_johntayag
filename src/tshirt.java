@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class tshirt{
+public class tshirt implements Comparable <tshirt> {
     private String name;
     int code; // unique identifier for each tshirt instance
     private double price;
@@ -67,4 +67,28 @@ public class tshirt{
     public int hashCode() {
         return Objects.hash(code);
     }
+
+    // Compare based on code within name
+    // (Name has priority, and if names are the same then code is used
+    @Override
+    public int compareTo(tshirt o) {
+
+            boolean SameName =
+                    this.getName().equalsIgnoreCase(o.getName());
+
+            if(SameName) // Both names are the same
+            {
+                //so, compare based on code
+                return this.getCode() - o.getCode();
+            }
+
+            else //All other cases
+            {
+                return this.getName().compareToIgnoreCase(
+                        o.getName());
+            }
+
+    }
+
 }
+

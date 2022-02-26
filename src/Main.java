@@ -51,9 +51,7 @@ public class Main {
         shirtsTreeMap.put("H641Bf", new tshirt("gucci10", 17352, 200.50, 8.7));
 //        displaytshirtsTreeMap(shirtsTreeMap);
 
-//Q6
-
-
+        //Q6
         PriorityQueue<tshirt> queue
                 = new PriorityQueue<tshirt>(new tshirtCodeComparator(SortType.Ascending));
 
@@ -61,24 +59,32 @@ public class Main {
         queue.add(new tshirt("gucci12", 19573, 199.99, 9.0));
 
         //add two 3rd-priority elements
-        queue.add(new tshirt("gucci14", 47232, 238.50, 8.5));
-        queue.add(new tshirt("gucci15", 57232, 238.50, 8.5));
+        queue.add(new tshirt("gucci15", 47232, 238.50, 8.5));
+        queue.add(new tshirt("gucci15", 37232, 238.50, 8.5));
         //add two 2rd-priority elements
         queue.add(new tshirt("gucci16", 15232, 238.50, 8.5));
         queue.add(new tshirt("gucci17", 13232, 238.50, 8.5));
         //add one top-priority element
-        queue.add(new tshirt("gucci17", 10232, 238.50, 8.5));
+        queue.add(new tshirt("gucci17", 90232, 238.50, 8.5));
 
         //remove and display one element
 
 
         //remove display all elements in priority order
-        System.out.println("Values in order of code Priority:");
+//        System.out.println("Values in order of code Priority:");
+//        while(!queue.isEmpty()){
+//            System.out.println(queue.remove());
+//        }
+
+        //Q7
+        System.out.println("tshirts in priority order using two field comparison");
         while(!queue.isEmpty()){
             System.out.println(queue.remove());
         }
 
     }
+
+
 
 
     public static void displaytshirtsArrayList(ArrayList<tshirt> shirts) {
