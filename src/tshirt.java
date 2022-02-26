@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class tshirt implements Comparable<tshirt>{
+public class tshirt{
     private String name;
     int code; // unique identifier for each tshirt instance
     private double price;
@@ -61,11 +61,6 @@ public class tshirt implements Comparable<tshirt>{
         if (o == null || getClass() != o.getClass()) return false;
         tshirt tshirt = (tshirt) o;
         return code == tshirt.code;
-    }
-
-    @Override
-    public int compareTo(tshirt o) {
-        return 0;
     }
 
     @Override

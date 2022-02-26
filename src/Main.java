@@ -17,7 +17,7 @@ public class Main {
         shirtsArraylist.add(new tshirt("gucci8", 61742, 200.50, 8.7));
         shirtsArraylist.add(new tshirt("gucci9", 91000, 200.50, 8.7));
         shirtsArraylist.add(new tshirt("gucci10", 17352, 200.50, 8.7));
-        displaytshirtsArrayList(shirtsArraylist);
+//        displaytshirtsArrayList(shirtsArraylist);
 
         //Q3,4
         Map<Long, tshirt> shirtsMap = new HashMap<>();
@@ -33,9 +33,9 @@ public class Main {
         shirtsMap.put(990034L, new tshirt("gucci9", 91000, 200.50, 8.7));
         shirtsMap.put(250034L, new tshirt("gucci10", 17352, 200.50, 8.7));
 
-        System.out.println("Enter key value:");
-        Long key = kb.nextLong();
-        findShirtMapByKey(key,shirtsMap);
+//        System.out.println("Enter key value:");
+//        Long key = kb.nextLong();
+//        findShirtMapByKey(key,shirtsMap);
 
         //Q5
         TreeMap<String, tshirt> shirtsTreeMap = new TreeMap<>();
@@ -49,21 +49,34 @@ public class Main {
         shirtsTreeMap.put("G641Bf", new tshirt("gucci8", 61742, 200.50, 8.7));
         shirtsTreeMap.put("Z641Bf", new tshirt("gucci9", 91000, 200.50, 8.7));
         shirtsTreeMap.put("H641Bf", new tshirt("gucci10", 17352, 200.50, 8.7));
-        displaytshirtsTreeMap(shirtsTreeMap);
+//        displaytshirtsTreeMap(shirtsTreeMap);
 
 //Q6
 
 
-//        PriorityQueue<tshirt> queue
-//                = new PriorityQueue<tshirt>(new tshirtCodeComparator());
-//        queue.add(new tshirt("gucci11", 57232, 238.50, 8.5));
-//        queue.add(new tshirt("gucci12", 19573, 199.99, 9.0));
-//        queue.add(new tshirt("gucci13", 27232, 138.50, 1.5));
-//
-//        System.out.println("Values in order of code Priority:");
-//        while(!queue.isEmpty()){
-//            System.out.println(queue.remove());
-//        }
+        PriorityQueue<tshirt> queue
+                = new PriorityQueue<tshirt>(new tshirtCodeComparator(SortType.Ascending));
+
+        queue.add(new tshirt("gucci13", 27232, 138.50, 1.5));
+        queue.add(new tshirt("gucci12", 19573, 199.99, 9.0));
+
+        //add two 3rd-priority elements
+        queue.add(new tshirt("gucci14", 47232, 238.50, 8.5));
+        queue.add(new tshirt("gucci15", 57232, 238.50, 8.5));
+        //add two 2rd-priority elements
+        queue.add(new tshirt("gucci16", 15232, 238.50, 8.5));
+        queue.add(new tshirt("gucci17", 13232, 238.50, 8.5));
+        //add one top-priority element
+        queue.add(new tshirt("gucci17", 10232, 238.50, 8.5));
+
+        //remove and display one element
+
+
+        //remove display all elements in priority order
+        System.out.println("Values in order of code Priority:");
+        while(!queue.isEmpty()){
+            System.out.println(queue.remove());
+        }
 
     }
 
