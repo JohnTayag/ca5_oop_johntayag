@@ -1,8 +1,10 @@
+package DTOs;
+
 import java.util.Objects;
 
-public class tshirt implements Comparable <tshirt> {
+    public class tshirt implements Comparable <tshirt> {
+    int code; // unique identifier for each DTOs.tshirt instance
     private String name;
-    int code; // unique identifier for each tshirt instance
     private double price;
     private double size;
 
@@ -12,6 +14,15 @@ public class tshirt implements Comparable <tshirt> {
         this.price = price;
         this.size = size;
     }
+
+    public tshirt(String name, double price, double size) {
+            this.code = 0;
+            this.name = name;
+            this.price = price;
+            this.size = size;
+        }
+
+    public tshirt() {}
 
     public String getName() {
         return name;
@@ -70,6 +81,7 @@ public class tshirt implements Comparable <tshirt> {
 
     // Compare based on code within name
     // (Name has priority, and if names are the same then code is used
+        //FIX
     @Override
     public int compareTo(tshirt o) {
 

@@ -1,4 +1,6 @@
 
+import DTOs.tshirt;
+
 import java.util.Comparator;
 
 public class tshirtCodeComparator
