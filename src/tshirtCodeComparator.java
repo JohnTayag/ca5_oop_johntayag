@@ -1,7 +1,9 @@
+import DTOs.Product;
+
 import java.util.Comparator;
 
 public class tshirtCodeComparator
-        implements Comparator<tshirt>
+        implements Comparator<Product>
 {
     private SortType sortType;
 
@@ -11,7 +13,7 @@ public class tshirtCodeComparator
     }
 
     @Override
-    public int compare(tshirt u1, tshirt u2)
+    public int compare(Product u1, Product u2)
     {
         int direction = sortType.getValue();
         return direction * (u1.getID() - u2.getID());

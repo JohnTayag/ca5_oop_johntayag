@@ -1,26 +1,28 @@
+package DTOs;
+
 import java.util.Objects;
 
-    public class tshirt implements Comparable <tshirt> {
-    int ID; // unique identifier for each tshirt instance
+    public class Product implements Comparable <Product> {
+    int ID; // unique identifier for each DTOs.Product instance
     private String name;
     private double price;
     private double size;
 
-    public tshirt(String name, int code, double price, double size) {
+    public Product(String name, int code, double price, double size) {
         this.name = name;
         this.ID = code;
         this.price = price;
         this.size = size;
     }
 
-    public tshirt(String name, double price, double size) {
+    public Product(String name, double price, double size) {
             this.ID = 0;
             this.name = name;
             this.price = price;
             this.size = size;
         }
 
-    public tshirt() {}
+    public Product() {}
 
     public String getName() {
         return name;
@@ -56,7 +58,7 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return "tshirt{" +
+        return "DTOs.Product{" +
                 "name='" + name + '\'' +
                 ", code=" + ID +
                 ", price=" + price +
@@ -68,8 +70,8 @@ import java.util.Objects;
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        tshirt tshirt = (tshirt) o;
-        return ID == tshirt.ID;
+        Product Product = (Product) o;
+        return ID == Product.ID;
     }
 
     @Override
@@ -81,7 +83,7 @@ import java.util.Objects;
     // (Name has priority, and if names are the same then code is used
         //FIX
     @Override
-    public int compareTo(tshirt o) {
+    public int compareTo(Product o) {
 
             boolean SameName =
                     this.getName().equalsIgnoreCase(o.getName());
