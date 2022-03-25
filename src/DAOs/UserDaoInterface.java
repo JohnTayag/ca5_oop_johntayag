@@ -14,4 +14,6 @@ public interface UserDaoInterface {
     Product deleteProductByID(int Id) throws DaoException;
 
     Product addProduct( Product product ) throws DaoException;
+
+    List<Product> filterProducts(double filterQuery) throws DaoException;
 }

@@ -19,7 +19,7 @@ INSERT INTO product VALUES
                       (null, "Polo Ralph Lauren icon logo long sleeve poplin shirt in blue",  100.50, 7),
                      (null,  "Levi's slouchy revere collar shirt in abrstact print",  66, 10),
                    (null,  "MIX & MATCH COLLUSION Unisex boxy shirt co-ord in warped print",  80.50, 6.5),
-                     (null,  "Puma crew tshirt",30, 7),
+                     (null,  "Puma crew tshirt",30, 7.5),
                     (null,  "Jack & Jones Originals short sleeve revere collar shirt in pink mini animal print",  40.50, 8.5),
                     (null, "Pull&Bear shirt",  33.50, 7.5),
                    (null, "Tommy Jeans slim fit oxford shirt in white", 66.20, 5),

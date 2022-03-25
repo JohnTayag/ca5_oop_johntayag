@@ -62,6 +62,19 @@ public class Main {
                     System.out.println("product: " + u.toString());
             }
 
+            System.out.println("\nCall filterProduct()");
+            //filter by two args (column,value) for later
+            //for now just filter by size
+            double filterQuery = 5.5;
+            List <Product> filteredProducts = IUserDao.filterProducts(filterQuery);     // call a method in the DAO
+
+            if (filteredProducts.isEmpty())
+                System.out.println("There are no Products with size: " + filterQuery);
+            else {
+                for (Product p : filteredProducts)
+                    System.out.println("Product(s) with size " + filterQuery + ": " +  p.toString());
+            }
+
         } catch (DaoException e) {
             e.printStackTrace();
         }
