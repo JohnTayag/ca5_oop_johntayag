@@ -1,5 +1,3 @@
-import DTOs.tshirt;
-
 import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
@@ -92,6 +90,7 @@ public class Main {
                     case FINDBYKEY:
                         System.out.println("Find Shirt by Key from Map");
                         System.out.println("Enter key value:");
+
                         Long key = kb.nextLong();
                         findShirtByKey(key, productsMap);
                         break;
@@ -117,6 +116,7 @@ public class Main {
                         while (!queue2.isEmpty()) {
                             System.out.println(queue2.remove());
                         }
+
                         break;
 
                     case EXIT:
@@ -173,6 +173,10 @@ public class Main {
         //add two 2rd-priority elements
         queue.add(new tshirt("Puma crew tshirt", 15232, 238.50, 7));
         queue.add(new tshirt("Puma crew tshirt", 13232, 238.50, 7.5));
+
+//        System.out.println("\nRemove and display one element");
+//        System.out.println("Printing out top element and removing it : \n "+ queue.poll());
+
         //add one top-priority element
         queue.add(new tshirt("Adidas oversized shirt", 90232, 238.50, 8));
     }
