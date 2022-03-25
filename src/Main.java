@@ -8,17 +8,41 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws DaoException {
+        Scanner kb = new Scanner(System.in);
+
         UserDaoInterface IUserDao = new MySqlProductDao();
         try {
-            System.out.println("\nCall findAllProducts():");
-            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
+//            System.out.println("\nCall findAllProducts():");
+//            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
+//
+//            if (products.isEmpty())
+//                System.out.println("There are no Products");
+//            else {
+//                for (Product product : products)
+//                    System.out.println("Product: " + product.toString());
+//            }
 
-            if (products.isEmpty())
-                System.out.println("There are no Products");
-            else {
-                for (Product product : products)
-                    System.out.println("Product: " + product.toString());
-            }
+            System.out.println("\nCall findProductById():");
+            System.out.println("Enter product Id:");
+            int id = kb.nextInt();
+
+            Product product = IUserDao.findProductByID(id);
+            if( product != null ) // null returned if product_id not valid
+                System.out.println("product found: " + product);
+            else
+                System.out.println("Product with that id not found");
+
+            // test dao - with an invalid ID (i.e. not in database)
+            int test_id = 67;
+
+            product = IUserDao.findProductByID(test_id);
+            if(product != null)
+                System.out.println("Product was found: " + product);
+            else
+                System.out.println("Product Id: " + test_id + " is not valid.");
+
+
+
         } catch (DaoException e) {
             e.printStackTrace();
         }

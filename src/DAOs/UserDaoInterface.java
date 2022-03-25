@@ -9,5 +9,5 @@ public interface UserDaoInterface {
 
     List<Product> findAllProducts() throws DaoException;
 
-//    public Product findProductByID(int ID) throws DaoException;
+    Product findProductByID(int Id) throws DaoException;
 }

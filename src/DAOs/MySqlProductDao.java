@@ -63,4 +63,57 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface
         }
         return productsList;
     }
+
+    @Override
+    public Product findProductByID(int Id) throws DaoException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Product product = null;
+        try
+        {
+            connection = this.getConnection();
+
+            String query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, Id);
+
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+                int product_Id = resultSet.getInt("PRODUCT_ID");
+                String name = resultSet.getString("NAME");
+                double price = resultSet.getDouble("PRICE");
+                double size = resultSet.getDouble("PRODUCT_SIZE");
+
+                product = new Product(name, product_Id, price, size);
+
+            }
+        } catch (SQLException e)
+        {
+            throw new DaoException("findProductById() " + e.getMessage());
+        } finally
+        {
+            try
+            {
+                if (resultSet != null)
+                {
+                    resultSet.close();
+                }
+                if (preparedStatement != null)
+                {
+                    preparedStatement.close();
+                }
+                if (connection != null)
+                {
+                    freeConnection(connection);
+                }
+            } catch (SQLException e)
+            {
+                throw new DaoException("findProductById() " + e.getMessage());
+            }
+        }
+        return product;     // reference to User object, or null value
+    }
 }
