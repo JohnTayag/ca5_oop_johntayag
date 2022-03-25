@@ -12,15 +12,15 @@ public class Main {
 
         UserDaoInterface IUserDao = new MySqlProductDao();
         try {
-//            System.out.println("\nCall findAllProducts():");
-//            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
-//
-//            if (products.isEmpty())
-//                System.out.println("There are no Products");
-//            else {
-//                for (Product product : products)
-//                    System.out.println("Product: " + product.toString());
-//            }
+            System.out.println("\nCall findAllProducts():");
+            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
+
+            if (products.isEmpty())
+                System.out.println("There are no Products");
+            else {
+                for (Product product : products)
+                    System.out.println("Product: " + product.toString());
+            }
 
             System.out.println("\nCall findProductById():");
             System.out.println("Enter product Id:");
@@ -41,7 +41,26 @@ public class Main {
             else
                 System.out.println("Product Id: " + test_id + " is not valid.");
 
+            System.out.println("\nCall deleteProductById():");
+            int delete_test_id = 5;
+            product = IUserDao.deleteProductByID(delete_test_id);
+            if( product != null ) // null returned if product_id not valid
+                System.out.println("delete product with id" + delete_test_id + " was found: " + product);
+            else
+                System.out.println("Product with that id not found");
 
+            System.out.println("Display products after delete:");
+            for (Product prd : products)
+                System.out.println("Product: " + prd.toString());
+
+            System.out.println("\nCall addProduct()");
+            IUserDao.addProduct(new Product("Levy Shoes 11s",  110, 5.5));
+            if( products.isEmpty() )
+                System.out.println("There are no Products");
+            else {
+                for (Product u : products)
+                    System.out.println("product: " + u.toString());
+            }
 
         } catch (DaoException e) {
             e.printStackTrace();

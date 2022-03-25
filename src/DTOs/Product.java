@@ -24,7 +24,9 @@ import java.util.Objects;
             this.size = size;
         }
 
-    public Product() {}
+    public Product() {
+
+    }
 
     public String getName() {
         return name;
