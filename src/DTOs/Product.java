@@ -2,15 +2,17 @@ package DTOs;
 
 import java.util.Objects;
 
-    public class Product implements Comparable <Product> {
-    int ID; // unique identifier for each DTOs.Product instance
+    public class Product implements Comparable <Product>
+    {
+
+    private int ID; // unique identifier for each DTOs.Product instance
     private String name;
     private double price;
     private double size;
 
-    public Product(String name, int code, double price, double size) {
+    public Product(String name, int id, double price, double size) {
         this.name = name;
-        this.ID = code;
+        this.ID = id;
         this.price = price;
         this.size = size;
     }

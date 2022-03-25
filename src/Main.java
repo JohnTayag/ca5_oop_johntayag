@@ -1,12 +1,27 @@
+import DAOs.MySqlProductDao;
+import DAOs.UserDaoInterface;
 import DTOs.Product;
-
+import Exceptions.DaoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DaoException {
+        UserDaoInterface IUserDao = new MySqlProductDao();
+        try {
+            System.out.println("\nCall findAllProducts():");
+            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
 
+            if (products.isEmpty())
+                System.out.println("There are no Products");
+            else {
+                for (Product product : products)
+                    System.out.println("Product: " + product.toString());
+            }
+        } catch (DaoException e) {
+            e.printStackTrace();
+        }
 
 //        Main app = new Main();
 //        app.start();
