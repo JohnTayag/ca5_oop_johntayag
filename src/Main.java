@@ -49,9 +49,9 @@ public class Main {
             else
                 System.out.println("Product with that id not found");
 
-            System.out.println("Display products after delete:");
-            for (Product prd : products)
-                System.out.println("Product: " + prd.toString());
+//            System.out.println("Display products after delete:");
+//            for (Product prd : products)
+//                System.out.println("Product: " + prd.toString());
 
             System.out.println("\nCall addProduct()");
             IUserDao.addProduct(new Product("Levy Shoes 11s",  110, 5.5));

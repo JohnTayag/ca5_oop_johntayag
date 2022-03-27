@@ -128,7 +128,7 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface
         {
             connection = this.getConnection();
 
-            String query = "DELETE * FROM PRODUCT WHERE PRODUCT_ID = ?";
+            String query = "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, Id);
 
