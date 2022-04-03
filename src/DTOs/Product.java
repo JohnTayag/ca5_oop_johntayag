@@ -60,17 +60,17 @@ import java.util.Objects;
         this.size = size;
     }
 
-    @Override
-    public String toString() {
-        return "DTOs.Product{" +
-                "name='" + name + '\'' +
-                ", code=" + ID +
-                ", price=" + price +
-                ", size=" + size +
-                '}';
-    }
+        @Override
+        public String toString() {
+            return "Product{" +
+                    "ID=" + ID +
+                    ", name='" + name + '\'' +
+                    ", price=" + price +
+                    ", size=" + size +
+                    '}';
+        }
 
-    @Override
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

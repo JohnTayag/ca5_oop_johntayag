@@ -12,68 +12,96 @@ public class Main {
 
         UserDaoInterface IUserDao = new MySqlProductDao();
         try {
-            System.out.println("\nCall findAllProducts():");
-            List<Product> products = IUserDao.findAllProducts();     // call a method in the DAO
 
-            if (products.isEmpty())
-                System.out.println("There are no Products");
-            else {
-                for (Product product : products)
-                    System.out.println("Product: " + product.toString());
-            }
+//            System.out.println("\nCall findAllProductsJSON():");
+//            String allProductsJSON = IUserDao.findAllProductsJSON();
+//            System.out.println(allProductsJSON);
 
-            System.out.println("\nCall findProductById():");
-            System.out.println("Enter product Id:");
-            int id = kb.nextInt();
+            System.out.println("\nCall findProductJSONById():");
+            System.out.println("Enter product Id to find:");
+            int Json_id = kb.nextInt();
 
-            Product product = IUserDao.findProductByID(id);
-            if( product != null ) // null returned if product_id not valid
-                System.out.println("product found: " + product);
-            else
-                System.out.println("Product with that id not found");
+            String findProductByIDJSON = IUserDao.findProductIDJSON(Json_id);
+            System.out.println(findProductByIDJSON);
 
-            // test dao - with an invalid ID (i.e. not in database)
-            int test_id = 67;
+//            System.out.println("\nCall findAllProducts():");
+//            List<Product> products = IUserDao.findAllProducts();
+//
+//            if (products.isEmpty())
+//                System.out.println("There are no Products");
+//            else {
+//                for (Product product : products)
+//                    System.out.println("Product: " + product.toString());
+//            }
 
-            product = IUserDao.findProductByID(test_id);
-            if(product != null)
-                System.out.println("Product was found: " + product);
-            else
-                System.out.println("Product Id: " + test_id + " is not valid.");
 
-            System.out.println("\nCall deleteProductById():");
-            int delete_test_id = 5;
-            product = IUserDao.deleteProductByID(delete_test_id);
-            if( product != null ) // null returned if product_id not valid
-                System.out.println("delete product with id" + delete_test_id + " was found: " + product);
-            else
-                System.out.println("Product with that id not found");
 
+//            System.out.println("\nCall findProductById():");
+//            System.out.println("Enter product Id to find:");
+//            int id = kb.nextInt();
+//
+//            Product product = IUserDao.findProductByID(id);
+//            if( product != null ) // null returned if product_id not valid
+//                System.out.println("product found: " + product);
+//            else
+//                System.out.println("Product with that id not found");
+//
+//            System.out.println("\n"+"test dao - with an invalid ID (i.e. not in database):");
+//            int test_id = 67;
+//
+//            product = IUserDao.findProductByID(test_id);
+//
+//            if(product != null)
+//                System.out.println("Product was found: " + product);
+//            else
+//                System.out.println("Product Id: " + test_id + " is not valid.");
+//
+//            System.out.println("\nCall deleteProductById():");
+//            System.out.println("Enter product Id to delete:");
+//            int delete_test_id = kb.nextInt();
+
+//            IUserDao.deleteProductByID(delete_test_id);
+//
 //            System.out.println("Display products after delete:");
-//            for (Product prd : products)
-//                System.out.println("Product: " + prd.toString());
+//
+//            products = IUserDao.findAllProducts();     // call a method in the DAO
+//
+//            if (products.isEmpty())
+//                System.out.println("There are no Products");
+//            else {
+//                for (Product after_deleted_products : products)
+//                    System.out.println("Product: " + after_deleted_products.toString());
+//            }
 
-            System.out.println("\nCall addProduct()");
-            IUserDao.addProduct(new Product("Levy Shoes 11s",  110, 5.5));
-            if( products.isEmpty() )
-                System.out.println("There are no Products");
-            else {
-                for (Product u : products)
-                    System.out.println("product: " + u.toString());
-            }
-
-            System.out.println("\nCall filterProduct()");
-            //filter by two args (column,value) for later
-            //for now just filter by size
-            double filterQuery = 5.5;
-            List <Product> filteredProducts = IUserDao.filterProducts(filterQuery);     // call a method in the DAO
-
-            if (filteredProducts.isEmpty())
-                System.out.println("There are no Products with size: " + filterQuery);
-            else {
-                for (Product p : filteredProducts)
-                    System.out.println("Product(s) with size " + filterQuery + ": " +  p.toString());
-            }
+//            System.out.println("\nCall addProduct()");
+//
+//            System.out.println("Enter product name:");
+//            String pName = kb.nextLine();
+//            System.out.println("Enter product price:");
+//            Double pPrice = kb.nextDouble();
+//            System.out.println("Enter product size:");
+//            Double pSize = kb.nextDouble();
+//
+//            IUserDao.addProduct(new Product(pName,  pPrice, pSize));
+//            if( products.isEmpty() )
+//                System.out.println("There are no Products");
+//            else {
+//                for (Product u : products)
+//                    System.out.println("product: " + u.toString());
+//            }
+//
+//            System.out.println("\nCall filterProduct()");
+//
+//            //filter by size
+//            double filterQuery = 6.5;
+//            List <Product> filteredProducts = IUserDao.filterProducts(filterQuery);     // call a method in the DAO
+//
+//            if (filteredProducts.isEmpty())
+//                System.out.println("There are no Products with size: " + filterQuery);
+//            else {
+//                for (Product p : filteredProducts)
+//                    System.out.println("Product(s) with size " + filterQuery + ": " +  p.toString());
+//            }
 
         } catch (DaoException e) {
             e.printStackTrace();
