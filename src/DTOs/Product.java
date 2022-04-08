@@ -1,5 +1,6 @@
 package DTOs;
 
+import java.util.Arrays;
 import java.util.Objects;
 
     public class Product implements Comparable <Product>
@@ -60,14 +61,17 @@ import java.util.Objects;
         this.size = size;
     }
 
+        public static String getTableHeader() {
+            StringBuilder sb = new StringBuilder(String.format(
+                    "%-70s | %5s | %10s |%10s", "Name", "Id", "Price", "Size"));
+            char[] line = new char[sb.length()];
+            Arrays.fill(line, '-');
+            return sb.append("\n").append(new String(line)).toString();
+        }
+
         @Override
         public String toString() {
-            return "Product{" +
-                    "ID=" + ID +
-                    ", name='" + name + '\'' +
-                    ", price=" + price +
-                    ", size=" + size +
-                    '}';
+            return String.format("%-70s | %5d | %10.2f |%10.2f", name, ID, price, size);
         }
 
         @Override

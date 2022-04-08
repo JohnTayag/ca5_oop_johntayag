@@ -29,6 +29,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+
+import jdk.swing.interop.SwingInterOpUtils;
 import org.json.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -71,10 +73,13 @@ public class Client {
                     Type userListType = new TypeToken<ArrayList<Product>>(){}.getType();
 
                     ArrayList<Product> userArray = gsonParser.fromJson(jsonString, userListType);
-
+                    System.out.println(Product.getTableHeader());
                     for(Product product : userArray) {
                         System.out.println(product);
                     }
+
+
+
 
 
                 } else   // the user has entered the Echo command or an invalid command
