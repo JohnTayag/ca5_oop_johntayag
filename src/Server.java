@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Locale;
 
 public class Server {
 
@@ -88,19 +89,22 @@ public class Server {
                     System.out.println("Server: (ClientHandler): Read command from client " + clientNumber + ": " + message);
                     final String COMMAND_REQUEST_DISPLAY_ALL = "DisplayAll";
                     final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
+                    final String COMMAND_REQUEST_DELETE_BY_ID = "DeletebyId";
+                    final String COMMAND_REQUEST_ADD_PRODUCT = "AddProduct";
+
                     if (message.equalsIgnoreCase(COMMAND_REQUEST_DISPLAY_ALL)) {
+
 //take out pretty print becuase it makes a line, in client it stops when it sees that \n
 
                         List<Product> products = dao.findAllProducts();
-                        System.out.println("server run"+products);
+                        System.out.println("server run" + products);
 
                         String gsonparsed = gsonParser.toJson(products);
                         System.out.println(gsonparsed);
                         socketWriter.println(gsonParser.toJson(products));
 
 
-                    }
-                   else if (message.startsWith("FindbyId")) {
+                    } else if (message.startsWith(COMMAND_REQUEST_FIND_BY_ID)) {
 
                         String tokens[] = message.split(" ");
                         int num = Integer.parseInt(tokens[1]);
@@ -113,20 +117,36 @@ public class Server {
                         socketWriter.println(gsonParser.toJson(product));
 
 
-                    }
-                    else if (message.startsWith("DeletebyId")) {
+                    } else if (message.startsWith(COMMAND_REQUEST_DELETE_BY_ID))   {
                         String result;
                         String tokens[] = message.split(" ");
                         int num = Integer.parseInt(tokens[1]);
 
                         boolean deleted = dao.deleteProductByID(num);
 
-                        if(!deleted) {
-                           result = "delete by id did not work(cant find id or wrong input)";
-                        }else{
+                        if (!deleted) {
+                            result = "delete by id did not work(cant find id or wrong input)";
+                        } else {
                             result = "delete by id did work";
                         }
                         socketWriter.println(result);
+
+
+                    }
+                    else if (message.startsWith(COMMAND_REQUEST_ADD_PRODUCT)) {
+
+                        String tokens[] = message.split(" ");
+                        String name = (tokens[1]);
+                        Double price = Double.parseDouble(tokens[2]);
+                        Double size = Double.parseDouble(tokens[3]);
+                        Product add_product = new Product(name,price,size);
+
+                        Product product = dao.addProduct(add_product);
+
+
+                        String gsonparsed = gsonParser.toJson(product);
+                        System.out.println(gsonparsed);
+                        socketWriter.println(gsonParser.toJson(product));
 
 
                     }

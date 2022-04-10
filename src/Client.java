@@ -49,9 +49,19 @@ public class Client {
 
             System.out.println("Please enter one of the commands:  (\"DisplayAll\" to display all entities, \n" +
                     "\"FindbyId x\" to find a product by id,\n" +
-                    "\"DeletebyId x\" to delete a product by id");
-            String command = in.nextLine();
+                    "\"DeletebyId x\" to delete a product by id,\n" +
+                    "\"AddProduct name price size\" to add a product");
 
+            //ADD
+//            Implement a client-side menu item that will allow the user to input data for an entity,
+//            serialize the data into JSON formatted request and send the JSON request to the server. The
+//            server will add the entity to the database using a relevant DAO, and will send a response to
+//            the client. The response will return the Entity object data incorporating the newly allocated
+//            ID (if the ID was auto generated). The client will display the newly added entity, along with
+//            its auto generated ID. If the insert fails, and appropriate error should be displayed.
+
+
+            String command = in.nextLine();
 
 
             OutputStream os = socket.getOutputStream();
@@ -61,6 +71,9 @@ public class Client {
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
             final String COMMAND_REQUEST_DISPLAY_ALL = "DisplayAll";
+            final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
+            final String COMMAND_REQUEST_DELETE_BY_ID = "DeletebyId";
+            final String COMMAND_REQUEST_ADD_PRODUCT = "AddProduct";
 
             boolean keep_looping = true;
             while (keep_looping) {
@@ -77,23 +90,25 @@ public class Client {
                         System.out.println(product);
                     }
 
-
-                }
-                else  if(command.equalsIgnoreCase("FindbyId"))   //we expect the server to return a time
+                } else if (command.equalsIgnoreCase(COMMAND_REQUEST_FIND_BY_ID))   //we expect the server to return a time
                 {
 
                     String jsonString = socketReader.nextLine();
                     System.out.println(jsonString);
 
-                }
-                else  if(command.equalsIgnoreCase("DeletebyId"))   //we expect the server to return a time
+                } else if (command.equalsIgnoreCase(COMMAND_REQUEST_DELETE_BY_ID))   //we expect the server to return a time
                 {
 
-                    String result= socketReader.nextLine();
+                    String result = socketReader.nextLine();
                     System.out.println(result);
 
-                }
-                else   // the user has entered the Echo command or an invalid command
+                } else if (command.equalsIgnoreCase(COMMAND_REQUEST_ADD_PRODUCT))   //we expect the server to return a time
+                {
+
+                    String result = socketReader.nextLine();
+                    System.out.println(result);
+
+                }else   // the user has entered the Echo command or an invalid command
                 {
                     String input = socketReader.nextLine();
                     System.out.println("Client message: Response from server: \"" + input + "\"");
