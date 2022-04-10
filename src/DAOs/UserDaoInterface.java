@@ -15,7 +15,7 @@ public interface UserDaoInterface {
 
     String findProductIDJSON(int Id) throws DaoException;
 
-    void deleteProductByID(int Id) throws DaoException;
+    boolean deleteProductByID(int Id) throws DaoException;
 
     Product addProduct( Product product ) throws DaoException;
 

@@ -114,6 +114,22 @@ public class Server {
 
 
                     }
+                    else if (message.startsWith("DeletebyId")) {
+                        String result;
+                        String tokens[] = message.split(" ");
+                        int num = Integer.parseInt(tokens[1]);
+
+                        boolean deleted = dao.deleteProductByID(num);
+
+                        if(!deleted) {
+                           result = "delete by id did not work(cant find id or wrong input)";
+                        }else{
+                            result = "delete by id did work";
+                        }
+                        socketWriter.println(result);
+
+
+                    }
                     else {
                         socketWriter.println("I'm sorry I don't understand :(");
                     }

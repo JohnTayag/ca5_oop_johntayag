@@ -47,8 +47,9 @@ public class Client {
 
             System.out.println("Client message: The Client is running and has connected to the server");
 
-            System.out.println("Please enter a command:  (\"DisplayAll\" to display all entities) \n" +
-                    "\"FindbyId x\" to find a product by id>");
+            System.out.println("Please enter one of the commands:  (\"DisplayAll\" to display all entities, \n" +
+                    "\"FindbyId x\" to find a product by id,\n" +
+                    "\"DeletebyId x\" to delete a product by id");
             String command = in.nextLine();
 
 
@@ -81,10 +82,15 @@ public class Client {
                 else  if(command.equalsIgnoreCase("FindbyId"))   //we expect the server to return a time
                 {
 
-
-
                     String jsonString = socketReader.nextLine();
                     System.out.println(jsonString);
+
+                }
+                else  if(command.equalsIgnoreCase("DeletebyId"))   //we expect the server to return a time
+                {
+
+                    String result= socketReader.nextLine();
+                    System.out.println(result);
 
                 }
                 else   // the user has entered the Echo command or an invalid command

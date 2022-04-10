@@ -233,7 +233,7 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface
     }
 
     @Override
-    public void deleteProductByID(int Id) throws DaoException
+    public boolean deleteProductByID(int Id) throws DaoException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -265,8 +265,11 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface
             } catch (SQLException e)
             {
                 throw new DaoException("deleteProductById() " + e.getMessage());
+
             }
+
         }
+        return true;
     }
 
     @Override

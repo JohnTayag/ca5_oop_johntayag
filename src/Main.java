@@ -55,15 +55,15 @@ public class Main {
             else
                 System.out.println("Product Id: " + test_id + " is not valid.");
 
-            System.out.println("\nCall deleteProductById():");
-            System.out.println("Enter product Id to delete:");
-            int delete_test_id = kb.nextInt();
-
-            IUserDao.deleteProductByID(delete_test_id);
-
-            System.out.println("Display products after delete:");
-
-            products = IUserDao.findAllProducts();     // call a method in the DAO
+//            System.out.println("\nCall deleteProductById():");
+//            System.out.println("Enter product Id to delete:");
+//            int delete_test_id = kb.nextInt();
+//
+//            IUserDao.deleteProductByID(delete_test_id);
+//
+//            System.out.println("Display products after delete:");
+//
+//            products = IUserDao.findAllProducts();
 
             if (products.isEmpty())
                 System.out.println("There are no Products");
@@ -73,7 +73,7 @@ public class Main {
             }
 
             System.out.println("\nCall addProduct()");
-
+            kb.nextLine();
             System.out.println("Enter product name:");
             String pName = kb.nextLine();
             System.out.println("Enter product price:");
