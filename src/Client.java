@@ -1,5 +1,3 @@
-
-
 /**
  * CLIENT                                                  March 2021
  * <p>
@@ -19,23 +17,18 @@
  * (Both the server and the client will be running together on this computer)
  */
 
-
 import DTOs.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.Gson;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
-
-import jdk.swing.interop.SwingInterOpUtils;
-import org.json.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import com.google.gson.Gson;
+
 import com.google.gson.reflect.TypeToken;
+
 public class Client {
     public static void main(String[] args) {
         Client client = new Client();
@@ -43,8 +36,10 @@ public class Client {
     }
 
     public void start() {
+
         Gson gsonParser = new GsonBuilder().setPrettyPrinting().create();
         Scanner in = new Scanner(System.in);
+
         try {
             Socket socket = new Socket("localhost", 8080);  // connect to server socket
             System.out.println("Client: Port# of this client : " + socket.getLocalPort());
@@ -52,8 +47,11 @@ public class Client {
 
             System.out.println("Client message: The Client is running and has connected to the server");
 
-            System.out.println("Please enter a command:  (\"DisplayAll\" to display all entities) \n>");
+            System.out.println("Please enter a command:  (\"DisplayAll\" to display all entities) \n" +
+                    "\"FindbyId x\" to find a product by id>");
             String command = in.nextLine();
+
+
 
             OutputStream os = socket.getOutputStream();
             PrintWriter socketWriter = new PrintWriter(os, true);   // true => auto flush buffers
@@ -62,27 +60,34 @@ public class Client {
 
             Scanner socketReader = new Scanner(socket.getInputStream());  // wait for, and retrieve the reply
             final String COMMAND_REQUEST_DISPLAY_ALL = "DisplayAll";
-            //ADDED
-            boolean keep_looking = true;
-            while (keep_looking) {
+
+            boolean keep_looping = true;
+            while (keep_looping) {
                 if (command.equalsIgnoreCase(COMMAND_REQUEST_DISPLAY_ALL))   //we expect the server to return a time
                 {
-                    //parse the json, populate and display
+
                     String jsonString = socketReader.nextLine();
-//                    System.out.println("Client message: Response from server Time: " + jsonString);
-                    Type userListType = new TypeToken<ArrayList<Product>>(){}.getType();
+                    Type userListType = new TypeToken<ArrayList<Product>>() {
+                    }.getType();
 
                     ArrayList<Product> userArray = gsonParser.fromJson(jsonString, userListType);
                     System.out.println(Product.getTableHeader());
-                    for(Product product : userArray) {
+                    for (Product product : userArray) {
                         System.out.println(product);
                     }
 
 
+                }
+                else  if(command.equalsIgnoreCase("FindbyId"))   //we expect the server to return a time
+                {
 
 
 
-                } else   // the user has entered the Echo command or an invalid command
+                    String jsonString = socketReader.nextLine();
+                    System.out.println(jsonString);
+
+                }
+                else   // the user has entered the Echo command or an invalid command
                 {
                     String input = socketReader.nextLine();
                     System.out.println("Client message: Response from server: \"" + input + "\"");

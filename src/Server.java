@@ -3,7 +3,6 @@ import DAOs.UserDaoInterface;
 import DTOs.Product;
 import Exceptions.DaoException;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -88,18 +87,34 @@ public class Server {
                 while ((message = socketReader.readLine()) != null) {
                     System.out.println("Server: (ClientHandler): Read command from client " + clientNumber + ": " + message);
                     final String COMMAND_REQUEST_DISPLAY_ALL = "DisplayAll";
+                    final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
                     if (message.equalsIgnoreCase(COMMAND_REQUEST_DISPLAY_ALL)) {
 //take out pretty print becuase it makes a line, in client it stops when it sees that \n
-                        // works with socketWriter.println(products); not  socketWriter.println(gsonParser.toJson(products));
+
                         List<Product> products = dao.findAllProducts();
                         System.out.println("server run"+products);
-//                        socketWriter.println(products);
+
                         String gsonparsed = gsonParser.toJson(products);
                         System.out.println(gsonparsed);
                         socketWriter.println(gsonParser.toJson(products));
 
 
-                    } else {
+                    }
+                   else if (message.startsWith("FindbyId")) {
+
+                        String tokens[] = message.split(" ");
+                        int num = Integer.parseInt(tokens[1]);
+
+                        Product product = dao.findProductByID(num);
+
+
+                        String gsonparsed = gsonParser.toJson(product);
+                        System.out.println(gsonparsed);
+                        socketWriter.println(gsonParser.toJson(product));
+
+
+                    }
+                    else {
                         socketWriter.println("I'm sorry I don't understand :(");
                     }
                 }
