@@ -20,4 +20,10 @@ public interface UserDaoInterface {
     Product addProduct( Product product ) throws DaoException;
 
     List<Product> filterProducts(double filterQuery) throws DaoException;
+
+    String getAveragePrice() throws DaoException;
+
+    String getNumberEntities() throws DaoException;
+
+    String getMinMaxShoeSize(String minORmax) throws DaoException;
 }

@@ -14,6 +14,16 @@ public class Main {
         UserDaoInterface IUserDao = new MySqlProductDao();
         try {
 
+//                        System.out.println("\nCall getAveragePrice():");
+//            System.out.println(IUserDao.getAveragePrice());
+//
+//            System.out.println("\nCall getNumberofEntities():");
+//            System.out.println(IUserDao.getNumberEntities());
+//
+//            String input="max";
+//            System.out.println("\nCall getMINorMAX():");
+//            System.out.println(IUserDao.getMinMaxShoeSize(input));
+
 //            System.out.println("\nCall findAllProductsJSON():");
 //            String allProductsJSON = IUserDao.findAllProductsJSON();
 //            System.out.println(allProductsJSON);

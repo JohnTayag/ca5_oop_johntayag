@@ -12,7 +12,6 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
-import java.util.Locale;
 
 public class Server {
 
@@ -91,6 +90,7 @@ public class Server {
                     final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
                     final String COMMAND_REQUEST_DELETE_BY_ID = "DeletebyId";
                     final String COMMAND_REQUEST_ADD_PRODUCT = "AddProduct";
+                    final String COMMAND_REQUEST_GET_SUMMARY = "GetSummary";
 
                     if (message.equalsIgnoreCase(COMMAND_REQUEST_DISPLAY_ALL)) {
 
@@ -111,13 +111,12 @@ public class Server {
 
                         Product product = dao.findProductByID(num);
 
-
                         String gsonparsed = gsonParser.toJson(product);
                         System.out.println(gsonparsed);
                         socketWriter.println(gsonParser.toJson(product));
 
 
-                    } else if (message.startsWith(COMMAND_REQUEST_DELETE_BY_ID))   {
+                    } else if (message.startsWith(COMMAND_REQUEST_DELETE_BY_ID)) {
                         String result;
                         String tokens[] = message.split(" ");
                         int num = Integer.parseInt(tokens[1]);
@@ -132,25 +131,29 @@ public class Server {
                         socketWriter.println(result);
 
 
-                    }
-                    else if (message.startsWith(COMMAND_REQUEST_ADD_PRODUCT)) {
+                    } else if (message.startsWith(COMMAND_REQUEST_ADD_PRODUCT)) {
 
                         String tokens[] = message.split(" ");
                         String name = (tokens[1]);
                         Double price = Double.parseDouble(tokens[2]);
                         Double size = Double.parseDouble(tokens[3]);
-                        Product add_product = new Product(name,price,size);
+                        Product add_product = new Product(name, price, size);
 
                         Product product = dao.addProduct(add_product);
-
 
                         String gsonparsed = gsonParser.toJson(product);
                         System.out.println(gsonparsed);
                         socketWriter.println(gsonParser.toJson(product));
 
+                    } else if (message.startsWith(COMMAND_REQUEST_GET_SUMMARY)) {
+                        String summary_message;
+                        String tokens[] = message.split(" ");
+                        String minormax = tokens[1];
+                        summary_message = dao.getAveragePrice() + " ," + dao.getNumberEntities() + " ," + dao.getMinMaxShoeSize(minormax);
 
-                    }
-                    else {
+                        socketWriter.println(summary_message);
+
+                    } else {
                         socketWriter.println("I'm sorry I don't understand :(");
                     }
                 }

@@ -48,21 +48,12 @@ public class Client {
             System.out.println("Client message: The Client is running and has connected to the server");
 
             System.out.println("Please enter one of the commands:  (\"DisplayAll\" to display all entities, \n" +
-                    "\"FindbyId x\" to find a product by id,\n" +
-                    "\"DeletebyId x\" to delete a product by id,\n" +
-                    "\"AddProduct name price size\" to add a product");
-
-            //ADD
-//            Implement a client-side menu item that will allow the user to input data for an entity,
-//            serialize the data into JSON formatted request and send the JSON request to the server. The
-//            server will add the entity to the database using a relevant DAO, and will send a response to
-//            the client. The response will return the Entity object data incorporating the newly allocated
-//            ID (if the ID was auto generated). The client will display the newly added entity, along with
-//            its auto generated ID. If the insert fails, and appropriate error should be displayed.
-
+                    "\"FindbyId x\" to find a product by id\n" +
+                    "\"DeletebyId x\" to delete a product by id\n" +
+                    "\"AddProduct name price size\" to add a product\n" +
+                    "\"GetSummary followed by min or max\" to get average product price, number of entities and min or max product size\n");
 
             String command = in.nextLine();
-
 
             OutputStream os = socket.getOutputStream();
             PrintWriter socketWriter = new PrintWriter(os, true);   // true => auto flush buffers
@@ -74,6 +65,7 @@ public class Client {
             final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
             final String COMMAND_REQUEST_DELETE_BY_ID = "DeletebyId";
             final String COMMAND_REQUEST_ADD_PRODUCT = "AddProduct";
+            final String COMMAND_REQUEST_GET_SUMMARY = "GetSummary";
 
             boolean keep_looping = true;
             while (keep_looping) {
@@ -108,7 +100,13 @@ public class Client {
                     String result = socketReader.nextLine();
                     System.out.println(result);
 
-                }else   // the user has entered the Echo command or an invalid command
+                } else if (command.equalsIgnoreCase(COMMAND_REQUEST_GET_SUMMARY))   //we expect the server to return a time
+                {
+
+                    String result = socketReader.nextLine();
+                    System.out.println(result);
+
+                } else   // the user has entered the Echo command or an invalid command
                 {
                     String input = socketReader.nextLine();
                     System.out.println("Client message: Response from server: \"" + input + "\"");
