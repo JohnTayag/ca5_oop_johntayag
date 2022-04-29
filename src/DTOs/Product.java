@@ -63,7 +63,7 @@ import java.util.Objects;
 
         public static String getTableHeader() {
             StringBuilder sb = new StringBuilder(String.format(
-                    "%-70s | %5s | %10s |%10s", "Name", "Id", "Price", "Size"));
+                    "%-70s | %5s | %10s |%10s", "Name", "Id", "Price", "Size(UK)"));
             char[] line = new char[sb.length()];
             Arrays.fill(line, '-');
             return sb.append("\n").append(new String(line)).toString();
@@ -71,7 +71,7 @@ import java.util.Objects;
 
         @Override
         public String toString() {
-            return String.format("%-70s | %5d | %10.2f |%10.2f", name, ID, price, size);
+            return String.format("%-70s | %5d | \u20AC%10.2f |%10.2f", name, ID, price, size);
         }
 
         @Override

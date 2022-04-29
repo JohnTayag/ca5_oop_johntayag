@@ -15,6 +15,7 @@ import java.util.Locale;
 
 
 public class MySqlProductDao extends MySqlDao implements UserDaoInterface {
+
     @Override
     public String getMinMaxShoeSize(String input) throws DaoException {
         Connection connection = null;
@@ -55,7 +56,6 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface {
         }
         return minMax_message;
     }
-
 
     @Override
     public String getNumberEntities() throws DaoException {
@@ -134,7 +134,6 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface {
         }
         return averagePrice_message;
     }
-
 
     @Override
     public String findAllProductsJSON() throws DaoException {
@@ -359,7 +358,7 @@ public class MySqlProductDao extends MySqlDao implements UserDaoInterface {
 //            ps.setInt(1, product.getID());
             ps.setString(1, product.getName());
             ps.setDouble(2, product.getPrice());
-            ps.setDouble(3, product.getPrice());
+            ps.setDouble(3, product.getSize());
 
             ps.executeUpdate();
 

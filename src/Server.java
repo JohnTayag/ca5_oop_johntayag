@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.Locale;
 
 public class Server {
 
@@ -87,10 +88,11 @@ public class Server {
                 while ((message = socketReader.readLine()) != null) {
                     System.out.println("Server: (ClientHandler): Read command from client " + clientNumber + ": " + message);
                     final String COMMAND_REQUEST_DISPLAY_ALL = "DisplayAll";
-                    final String COMMAND_REQUEST_FIND_BY_ID = "FindbyId";
-                    final String COMMAND_REQUEST_DELETE_BY_ID = "DeletebyId";
-                    final String COMMAND_REQUEST_ADD_PRODUCT = "AddProduct";
-                    final String COMMAND_REQUEST_GET_SUMMARY = "GetSummary";
+                    final String COMMAND_REQUEST_FIND_BY_ID = "findbyid";
+                    final String COMMAND_REQUEST_DELETE_BY_ID = "deletebyid";
+
+                    final String COMMAND_REQUEST_ADD_PRODUCT = "addproduct";
+                    final String COMMAND_REQUEST_GET_SUMMARY = "getsummary";
 
                     if (message.equalsIgnoreCase(COMMAND_REQUEST_DISPLAY_ALL)) {
 
@@ -104,7 +106,7 @@ public class Server {
                         socketWriter.println(gsonParser.toJson(products));
 
 
-                    } else if (message.startsWith(COMMAND_REQUEST_FIND_BY_ID)) {
+                    } else if (message.toLowerCase(Locale.ROOT).startsWith(COMMAND_REQUEST_FIND_BY_ID)) {
 
                         String tokens[] = message.split(" ");
                         int num = Integer.parseInt(tokens[1]);
@@ -116,13 +118,16 @@ public class Server {
                         socketWriter.println(gsonParser.toJson(product));
 
 
-                    } else if (message.startsWith(COMMAND_REQUEST_DELETE_BY_ID)) {
+                    }
+                    else if (message.toLowerCase(Locale.ROOT).startsWith(COMMAND_REQUEST_DELETE_BY_ID))
+//                    else if (message.contains())
+                    {
                         String result;
                         String tokens[] = message.split(" ");
                         int num = Integer.parseInt(tokens[1]);
 
                         boolean deleted = dao.deleteProductByID(num);
-
+                        //bug always true
                         if (!deleted) {
                             result = "delete by id did not work(cant find id or wrong input)";
                         } else {
@@ -131,21 +136,24 @@ public class Server {
                         socketWriter.println(result);
 
 
-                    } else if (message.startsWith(COMMAND_REQUEST_ADD_PRODUCT)) {
+                    }
 
+                    else if (message.toLowerCase(Locale.ROOT).startsWith(COMMAND_REQUEST_ADD_PRODUCT)) {
                         String tokens[] = message.split(" ");
                         String name = (tokens[1]);
                         Double price = Double.parseDouble(tokens[2]);
                         Double size = Double.parseDouble(tokens[3]);
-                        Product add_product = new Product(name, price, size);
-
+                        System.out.println("reached here 2");
+                        Product add_product = new Product(name,price,size);
+                        System.out.println("reached here 1");
                         Product product = dao.addProduct(add_product);
 
+                        System.out.println("reached here");
                         String gsonparsed = gsonParser.toJson(product);
                         System.out.println(gsonparsed);
                         socketWriter.println(gsonParser.toJson(product));
 
-                    } else if (message.startsWith(COMMAND_REQUEST_GET_SUMMARY)) {
+                    } else if (message.toLowerCase(Locale.ROOT).startsWith(COMMAND_REQUEST_GET_SUMMARY)) {
                         String summary_message;
                         String tokens[] = message.split(" ");
                         String minormax = tokens[1];

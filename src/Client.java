@@ -46,12 +46,12 @@ public class Client {
             System.out.println("Client: Port# of Server :" + socket.getPort());
 
             System.out.println("Client message: The Client is running and has connected to the server");
-
-            System.out.println("Please enter one of the commands:  (\"DisplayAll\" to display all entities, \n" +
+            System.out.println("===================================================================");
+            System.out.println("Please enter one of the commands:  \n\"DisplayAll\" to display all entities \n" +
                     "\"FindbyId x\" to find a product by id\n" +
                     "\"DeletebyId x\" to delete a product by id\n" +
                     "\"AddProduct name price size\" to add a product\n" +
-                    "\"GetSummary followed by min or max\" to get average product price, number of entities and min or max product size\n");
+                    "\"GetSummary followed by min or max\" to get average product price, number of entities and min or max product size");
 
             String command = in.nextLine();
 
@@ -96,7 +96,6 @@ public class Client {
 
                 } else if (command.equalsIgnoreCase(COMMAND_REQUEST_ADD_PRODUCT))   //we expect the server to return a time
                 {
-
                     String result = socketReader.nextLine();
                     System.out.println(result);
 
